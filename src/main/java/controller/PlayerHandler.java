@@ -3,9 +3,11 @@ package controller;
 import dao.PlayerDao;
 import dao.impl.PlayerDaoImpl;
 import java.util.Scanner;
+import lib.Inject;
 import model.Player;
 
-public class UserHandler implements ConsoleHandler {
+public class PlayerHandler implements ConsoleHandler {
+    @Inject
     private PlayerDao playerDao = new PlayerDaoImpl();
 
     @Override
