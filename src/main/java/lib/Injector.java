@@ -15,6 +15,7 @@ public class Injector {
 
         Field[] declaredFields = clazz.getDeclaredFields();
         for (Field declaredField : declaredFields) {
+            declaredField.getType();
             if (declaredField.getAnnotation(Inject.class) != null) {
                 declaredField.setAccessible(true);
                 Object dao = Factory.getDao(declaredField.getType());

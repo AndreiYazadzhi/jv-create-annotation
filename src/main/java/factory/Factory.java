@@ -4,8 +4,17 @@ import dao.BetDao;
 import dao.PlayerDao;
 import dao.impl.BetDaoImpl;
 import dao.impl.PlayerDaoImpl;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Factory {
+    private static Map<Class, Object> DaoMap = new HashMap<>();
+
+    static {
+        DaoMap.put(BetDao.class, getBetDao());
+        DaoMap.put(PlayerDao.class, getPlayerDao());
+    }
+
     private static BetDao betDao;
     private static PlayerDao playerDao;
 
@@ -24,12 +33,10 @@ public class Factory {
     }
 
     public static Object getDao(Class clazz) {
-        if (clazz == BetDao.class) {
-            return getBetDao();
+        if (!DaoMap.containsKey(clazz)) {
+            throw new RuntimeException("Dao for object "
+                    + clazz.getName() + " is not exist!");
         }
-        if (clazz == PlayerDao.class) {
-            return getPlayerDao();
-        }
-        throw new RuntimeException("Dao for object " + clazz.getName() + " is not exist!");
+        return DaoMap.get(clazz);
     }
 }
