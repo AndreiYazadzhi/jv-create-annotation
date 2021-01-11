@@ -1,12 +1,13 @@
 package controller;
 
 import dao.BetDao;
-import dao.impl.BetDaoImpl;
 import java.util.Scanner;
+import lib.Inject;
 import model.Bet;
 
 public class BetHandler implements ConsoleHandler {
-    private BetDao betDao = new BetDaoImpl();
+    @Inject
+    private BetDao betDao;
 
     @Override
     public void handle() {
